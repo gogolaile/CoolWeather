@@ -1,0 +1,42 @@
+package com.example.train_qurey;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
+
+public class MainActivity extends Activity {
+
+	View.Welcome wv;
+	Handler hd= new Handler(){
+	        	public void handlerMessage(Message msg){
+	        		switch(msg.what){
+	        		case 0:
+	        			gotoWelcomeView();
+	        	        break;
+	        		case 1:
+	        			gotoMainMenu();
+	        			break;
+	        		}
+	        	}
+	};
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.hd.sendEmptyMessage(0);
+
+	}
+	public void  gotoMainMenu(){
+		setContentView(R.layout.activity_main);
+	}
+	public void gotoWelcomeView(){
+		if(wv == null)
+			wv = new View.Welcome(MainActivity.this);
+		setContentView(wv);
+	}
+
+
+}

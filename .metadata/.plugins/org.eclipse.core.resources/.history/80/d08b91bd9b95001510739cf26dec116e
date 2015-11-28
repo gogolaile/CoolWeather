@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Train_Qurey</string>
+    <string name="the_title">the title</string>
+    <string name="the_main_title">列车查询系统</string>
+
+</resources>

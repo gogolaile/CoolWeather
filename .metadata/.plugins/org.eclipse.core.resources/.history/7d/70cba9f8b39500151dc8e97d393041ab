@@ -1,0 +1,39 @@
+package View;
+
+import com.example.train_qurey.MainActivity;
+import com.example.train_qurey.R;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.View;
+
+public class Welcome extends View {
+
+	int[] bitlogo;
+	Bitmap[]  bitmap;
+	Paint paint;
+	MainActivity activity;
+	public Welcome(MainActivity activity) {
+		super(activity);
+		this.activity = activity;
+		// TODO Auto-generated constructor stub
+		Resources res = this.getResources();
+		paint = new Paint();
+		paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+		bitlogo = new int[]{R.drawable.baina,R.drawable.bnkjs};
+		int number = bitlogo.length;
+		for(int i=0;i < number;i++){
+			bitmap[i] = BitmapFactory.decodeResource(res, bitlogo[i]);
+		}
+	}
+	
+	public void onDraw(Canvas canvas){
+		
+	}
+}
