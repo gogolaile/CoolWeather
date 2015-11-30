@@ -52,9 +52,9 @@
     android:layout_height="match_parent">
    <TableLayout 
        android:layout_width="0dp"
+       android:layout_weight="5"
        android:layout_height="match_parent"
        android:background="#FFCC66"
-       android:layout_weight="5"
        android:layout_margin="10dip"
 >
        <TableRow >
@@ -109,7 +109,7 @@
                android:background="@drawable/help_button"/>          
        </TableRow>
    </TableLayout>
-   <View.GGView 
+   <VIEW1.GGView 
        android:layout_width="0dp"
        android:layout_height="match_parent"
        android:layout_weight="3"
