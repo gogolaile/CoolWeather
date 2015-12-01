@@ -1,0 +1,17 @@
+package Utils;
+import java.util.*;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class LoadUtil {
+	public static SQLiteDatabase createOropenDatabase(){}
+	public static void createTable(String sql){}
+	public static boolean insert(String sql){}
+	public static Vector<Vector<String>> query(String sql){}
+	public static Vector<Vector<String>> getInfo(String tname){}
+	public static Vector<Vector<String>> getSameVector(String start,String end){}
+	public static Vector<Vector<String>> combine(Vector<Vector<String>> temp,Vector<Vector<String>>temp1,Vector<Vector<String>> temp2){}
+	public static Vector<Vector<String>> trainSearch(String tname){}
+	public static Vector<Vector<String>> stationSearch(String station){}
+	public static Vector<Vector<Stirng>>  Zjzquery(String start,String zjz,String end){} 
+}

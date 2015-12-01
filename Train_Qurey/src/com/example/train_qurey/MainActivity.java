@@ -11,7 +11,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOUTVIEW,HELPVIEW,CCTJVIEW,CZTJVIEW,GXTJVIEW};
 
@@ -67,6 +71,7 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				gotoZZCX();
+				
 			}
 		});
 		
@@ -85,6 +90,7 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				gotoCZCX();
+				
 			}
 		});
 		
@@ -94,6 +100,7 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				gotoFJGN();
+				
 			}
 		});
 		about_button.setOnClickListener(new View.OnClickListener() {
@@ -122,27 +129,143 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 	public void gotoZZCX(){
 		setContentView(R.layout.zzcx);
 		curr = WhichView.ZZCXVIEW;
+		Button zzcx_qurey = (Button)findViewById(R.id.zzcxbt);
+		Button zzcx_back = (Button)findViewById(R.id.zzcxfhbt);
+		zzcx_qurey.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+			}
+		});
+		
+		zzcx_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoMainMenu();
+			}
+		});
 	}
 	public void gotoCCCX(){
 		setContentView(R.layout.cccx);
 		curr = WhichView.CCCXVIEW;
+		Button cccx_qurey = (Button)findViewById(R.id.cccx_cx);
+		Button cccx_back = (Button)findViewById(R.id.cccx_fh);
+		cccx_qurey.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+			}
+		});
+		
+		cccx_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoMainMenu();
+			}
+		});
 	}
 	public void gotoCZCX(){
 		setContentView(R.layout.czcx);
 		curr = WhichView.CZCXVIEW;
+		Button czcx_qurey = (Button)findViewById(R.id.czcx_cx);
+		Button czcx_back = (Button)findViewById(R.id.czcx_fh);
+		czcx_qurey.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+			}
+		});
+		czcx_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoMainMenu();
+			}
+		});
 	}
 	
 	public void gotoCCTJ(){
 		setContentView(R.layout.cctj);
 		curr = WhichView.CCTJVIEW;
+		Button cctj_add = (Button)findViewById(R.id.cctj_tj);
+		Button cctj_fh = (Button)findViewById(R.id.cctj_fh);
+		cctj_add.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+			}
+		});
+		cctj_fh.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoFJGN();
+			}
+		});
 	}
 	public void gotoCZTJ(){
 		setContentView(R.layout.cztj);
 		curr = WhichView.CZTJVIEW;
+		Button cztj_add = (Button)findViewById(R.id.cztj_tj);
+		Button cztj_back = (Button)findViewById(R.id.cztj_fh);
+		cztj_add.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+			}
+		});
+		cztj_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoFJGN();
+			}
+		});
 	}
 	public void gotoGXTJ(){
 		setContentView(R.layout.gxtj);
 		curr = WhichView.GXTJVIEW;
+		Button gxtj_add = (Button)findViewById(R.id.gxtj_tj);
+		Button gxtj_back = (Button)findViewById(R.id.gxtj_fh);
+		gxtj_add.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+			}
+		});
+		gxtj_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoFJGN();
+			}
+		});
 	}
 	public void gotoFJGN(){
 		setContentView(R.layout.fjgnmenu);
@@ -176,6 +299,108 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 				gotoGXTJ();
 			}
 		});
+	}
+	
+	public boolean isLegal(){
+		  if(curr == WhichView.ZZCXVIEW){
+			  EditText start_station = (EditText)findViewById(R.id.EditText01);
+			  EditText transfer_station = (EditText)findViewById(R.id.zzcxzzz);
+			  EditText terminal_station = (EditText)findViewById(R.id.zzcxzdz);
+			  CheckBox check = (CheckBox)findViewById(R.id.zzcxzzzbt);
+			  if(start_station.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "出发站不能为空",Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(terminal_station.getText().toString().trim().equals("")){ 
+				  Toast.makeText(MainActivity.this, "终点站不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+				  }
+			  if(check.isChecked()&&transfer_station.getText().toString().trim().equals(""))return true;
+			  if(start_station.getText().toString().trim().equals(terminal_station.getText().toString().trim())){
+				  Toast.makeText(MainActivity.this, "出发站和终点站不能相同", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }	
+		  }
+		  if(curr == WhichView.CCCXVIEW){
+			  EditText train_number = (EditText)findViewById(R.id.cccxcc);
+			  if(train_number.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "车次不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+		  }
+		  if(curr == WhichView.CZCXVIEW){
+			  EditText train_station = (EditText)findViewById(R.id.czcxwb);
+			  if(train_station.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this,"车站不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  
+		  }
+		  if(curr == WhichView.CCTJVIEW){
+			  EditText train_number = (EditText)findViewById(R.id.cctj_cm);
+			  EditText train_type = (EditText)findViewById(R.id.cctj_lclx);
+			  EditText start_station = (EditText)findViewById(R.id.cctj_sfz);
+			  EditText terminal_station = (EditText)findViewById(R.id.cctj_zdz);
+			  if(train_number.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "车次不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(train_type.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "列车类型不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(start_station.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "始发站不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(terminal_station.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "终点站不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(start_station.getText().toString().trim().equals(terminal_station.getText().toString().trim())){
+				  Toast.makeText(MainActivity.this, "始发站和终点站不能相同", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }	
+		  }
+		  if(curr == WhichView.CZTJVIEW){
+			  EditText train_station = (EditText)findViewById(R.id.et_cztj_czmc);
+			  EditText train_station_jc = (EditText)findViewById(R.id.et_cztj_czjc);
+			  if(train_station.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "车站名称不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(train_station_jc.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "车站简称不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+		  }
+		  if(curr == WhichView.GXTJVIEW){
+			  EditText train_number = (EditText)findViewById(R.id.et_gxtj_cm);
+			  EditText train_station = (EditText)findViewById(R.id.et_gxtj_zm);
+			  EditText arrive_time = (EditText)findViewById(R.id.et_gxtj_dzsj);
+			  EditText start_time = (EditText)findViewById(R.id.et_gxtj_kcsj);
+			  if(train_number.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "车次不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(train_station.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "站名不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(arrive_time.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "到站时间不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }			  
+			  if(start_time.getText().toString().trim().equals("")){
+				  Toast.makeText(MainActivity.this, "开车时间不能为空", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }
+			  if(arrive_time.getText().toString().trim().equals(start_time.getText().toString().trim())){
+				  Toast.makeText(MainActivity.this, "开车时间不能与到站时间相同", Toast.LENGTH_SHORT).show();
+				  return true;
+			  }	 
+		  }
+		  return false;
 	}
 
 	public boolean onKeyDown(int KeyCode,KeyEvent e){
