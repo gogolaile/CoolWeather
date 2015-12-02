@@ -8,7 +8,7 @@ public class CreatTable {
 					"(Tid integer primary key,Tname char (20),"+
 					"Tstartation char(20),Tterminus char(20),Ttype char(20))",
 				    "create table if not exists station(Sid integer primary key,"+
-					"Sname char(20),spy char(10))",
+					"Sname char(20),Spy char(10))",
 					"create table if not exists relation"+
 					"(Rid integer primary key,Tid integer,Sid integer,Rarrivetime"+
 							"char(20),Rstarttime char(20))"

@@ -3,6 +3,7 @@ import java.util.*;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import com.example.train_qurey.R;
 
 public class LoadUtil {
 
@@ -11,7 +12,7 @@ public class LoadUtil {
 	public static SQLiteDatabase createOrOpenDatabase(){
 		SQLiteDatabase sld = null;
 		try{
-			sld = SQLiteDatabase.openDatabase("/data/data/mydb", null, SQLiteDatabase.OPEN_READWRITE|SQLiteDatabase.CREATE_IF_NECESSARY);
+			sld = SQLiteDatabase.openDatabase("/data/data/com.example.train_qurey/mydb", null, SQLiteDatabase.OPEN_READWRITE|SQLiteDatabase.CREATE_IF_NECESSARY);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -56,4 +57,22 @@ public class LoadUtil {
 		}
 		return vector;
 	}
+	
+	public static int getInsertId(String table,String sid){
+		int id = 0;
+		String sql = "select Max(" + sid + ") from " + table ;
+		SQLiteDatabase db = createOrOpenDatabase();
+		try{
+			Cursor cursor = db.rawQuery(sql, new String[]{});
+			if(cursor.moveToNext()){
+				id = cursor.getInt(0);
+			}
+				cursor.close();
+				db.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		id++;
+		return id;
+	} 
 }
