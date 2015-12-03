@@ -1,0 +1,47 @@
+package com.example.train_qurey;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
+
+public class CityAdapter<T> extends BaseAdapter implements Filterable {
+
+	public CityAdapter(Context context,int textViewResourceId,T[] objects,T[] objects2){
+		init(context,textViewResourceId,0,Arrays.asList(objects),Arrays.asList(objects2))
+	}
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Filter getFilter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

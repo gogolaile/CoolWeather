@@ -14,9 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -38,6 +36,7 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 	VIEW1.Welcome wv;
 	WhichView curr;
 	String[][] msgg;
+	String[] s1,s2;
     public Handler hd= new Handler(){
 	        	public void handleMessage(Message msg){
 	        		System.out.println("handle the message");
@@ -142,31 +141,8 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 			wv = new VIEW1.Welcome(MainActivity.this);
 		setContentView(wv);
 	}
-	public void gotoZZCX(){
-		setContentView(R.layout.zzcx);
-		curr = WhichView.ZZCXVIEW;
-		Button zzcx_qurey = (Button)findViewById(R.id.zzcxbt);
-		Button zzcx_back = (Button)findViewById(R.id.zzcxfhbt);
-		zzcx_qurey.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(isLegal())
-					return;
-				
-			}
-		});
-		
-		zzcx_back.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				gotoMainMenu();
-			}
-		});
-	}
+	
+
 	public void gotoCCCX(){
 		setContentView(R.layout.cccx);
 		curr = WhichView.CCCXVIEW;
@@ -179,6 +155,21 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 				// TODO Auto-generated method stub
 				if(isLegal())
 					return;
+				AutoCompleteTextView cccx_train_number = (AutoCompleteTextView)findViewById(R.id.cccxcc);
+				String Scccx_train_number = cccx_train_number.getText().toString().trim();
+				String sql = "select Tid from train where Tname = '"+ Scccx_train_number +"'";
+				Vector<Vector<String>> temp = LoadUtil.query(sql);
+				if(temp.size() == 0){
+					Toast.makeText(MainActivity.this, "对不起，该车次不存在", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				temp =LoadUtil.trainsearch(Scccx_train_number);
+				String[][] msgInfo = new String[temp.elementAt(0).size()][temp.size()];
+				for(int i =0; i < temp.elementAt(0).size(); i++)
+					for(int j = 0;j < temp.size();j++){
+						msgInfo[i][j] = temp.get(j).get(i);
+					}
+				gotoListView(msgInfo);
 			}
 		});
 		
@@ -203,7 +194,25 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 				// TODO Auto-generated method stub
 				if(isLegal())
 					return;
-				
+				AutoCompleteTextView czcx_station_name =(AutoCompleteTextView)findViewById(R.id.czcxwb);
+				String Sczcx_station_name = czcx_station_name.getText().toString().trim();
+				String sql = "select Sid from station where Sname = '" + Sczcx_station_name + "'";
+				Vector<Vector<String>> temp = LoadUtil.query(sql);
+				if(temp.size() == 0){
+					Toast.makeText(MainActivity.this, "对不起，不存在该车站", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				temp = LoadUtil.stationsearch(Sczcx_station_name);
+				if(temp.size() == 0){
+					Toast.makeText(MainActivity.this, "对不起,没有相关信息",Toast.LENGTH_SHORT).show();
+					return;
+				}
+				String[][] msgInfo = new String[temp.elementAt(0).size()][temp.size()];
+				for(int i = 0; i < temp.elementAt(0).size();i++)
+					for(int j = 0;j <temp.size();j++){
+						msgInfo[i][j] = temp.get(j).get(i);
+					}
+				gotoListView(msgInfo);
 			}
 		});
 		czcx_back.setOnClickListener(new View.OnClickListener() {
@@ -245,19 +254,19 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 					return;
 				}
 				
-				sql = "select * from Sid from station where Sname ='" + Scctj_start_station + "'";
+				sql = "select Sid from station where Sname ='" + Scctj_start_station + "'";
 				temp = LoadUtil.query(sql);
 				if(temp.size() == 0){
 					Toast.makeText(MainActivity.this, "始发站不存在", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				sql = "select * from Sid from station where Sname ='" + Scctj_terminal_station + "'";
+				sql = "select Sid from station where Sname ='" + Scctj_terminal_station + "'";
 				temp = LoadUtil.query(sql);
 				if(temp.size() == 0){
 					Toast.makeText(MainActivity.this, "终点站不存在", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				sql = "insert into train values(" + Tid + "'" +  Scctj_train_number + "','" + Scctj_train_type + "','" + Scctj_start_station + "','" + Scctj_terminal_station +"')";
+				sql = "insert into train values(" + Tid + ",'" +  Scctj_train_number + "','" + Scctj_train_type + "','" + Scctj_start_station + "','" + Scctj_terminal_station +"')";
 				if(!LoadUtil.insert(sql)){
 					Toast.makeText(MainActivity.this, "对不起，添加失败", Toast.LENGTH_SHORT).show();
 				}else{
@@ -647,7 +656,92 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 			gotoFJGN();
 			return true;
 		}
+		if(curr == WhichView.LISTVIEW || curr == WhichView.PASSSTATIONVIEW){
+			gotoMainMenu();
+			return true;
+		}
 			return false;
 	}
+	
+	public void gotoZZCX(){
+		setContentView(R.layout.zzcx);
+		curr = WhichView.ZZCXVIEW;
+		Button zzcx_qurey = (Button)findViewById(R.id.zzcxbt);
+		Button zzcx_back = (Button)findViewById(R.id.zzcxfhbt);
+		final CheckBox zzzcx = (CheckBox)findViewById(R.id.zzcxzzzbt);
+		zzcx_qurey.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(isLegal())
+					return;
+				AutoCompleteTextView zzcx_start_station = (AutoCompleteTextView)findViewById(R.id.EditText01);
+				AutoCompleteTextView zzcx_transfer_station = (AutoCompleteTextView)findViewById(R.id.zzcxzzz);
+				AutoCompleteTextView zzcx_arrive_station = (AutoCompleteTextView)findViewById(R.id.zzcxzdz);
+				String Sstart_station = zzcx_start_station.getText().toString().trim();
+				String Stransfer_station = zzcx_transfer_station.getText().toString().trim();
+				String Sarrive_station = zzcx_arrive_station.getText().toString().trim();
+				Vector<Vector<String>> temp;
+				if(zzzcx.isChecked()){
+					temp = LoadUtil.zzzsearch(Sstart_station,Stransfer_station,Sarrive_station);
+					if(temp.size() == 0){
+						Toast.makeText(MainActivity.this, "没有你所查找的中转站信息", Toast.LENGTH_SHORT);
+						return;
+					}
+				}else{
+				temp =LoadUtil.zzsearch(Sstart_station,Sarrive_station);
+				if(temp.size() == 0){
+					Toast.makeText(MainActivity.this, "对不起，没有相关车站信息", Toast.LENGTH_SHORT);
+					return;
+				}
+				}
+				String[][] msgInfo = new String[temp.elementAt(0).size()][temp.size()];
+				for(int i =0; i < temp.elementAt(0).size(); i++)
+					for(int j = 0;j < temp.size();j++){
+						msgInfo[i][j] = temp.get(j).get(i);
+					}
+				gotoListView(msgInfo);	
+			}
+		});
+		
+		zzcx_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoMainMenu();
+			}
+		});
+	}
+	
+	public void initList(){
+		String sql = "select Sname from station";
+		Vector<Vector<String>> temp = LoadUtil.query(sql);
+		String [][] temp_sname = new String[temp.get(0).size()][temp.size()];
+		for(int i=0;i<temp.get(0).size();i++)
+			for(int j= 0;j < temp.size();j++){
+				temp_sname[i][j] = temp.get(j).get(i);
+			}
+		this.s1 = temp_sname[0];
+		sql = "select Spy from station";
+		Vector<Vector<String>> temp1 = LoadUtil.query(sql);
+		String [][] temp_spy = new String[temp1.get(0).size()][temp1.size()];
+		for(int i=0;i<temp1.get(0).size();i++)
+			for(int j= 0;j < temp1.size();j++){
+				temp_spy[i][j] = temp1.get(j).get(i);
+			}
+		this.s2 = temp_spy[0];
+	}
+	
+	public void initLisitarray(int id){
+		CityAdapter<String> cAdapter = new CityAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,this.s1,this.s2);
+		AutoCompleteTextView autoView = (AutoCompleteTextView)findViewById(id);
+		autoView.setAdapter(cAdapter);
+		autoView.setThreshold(1);
+		autoView.setDropDownHeight(100);
+		autoView.setDropDownBackgroundResource(R.color.gray);
+	}
+	
 
 }
