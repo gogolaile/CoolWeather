@@ -85,11 +85,11 @@ public class LoadUtil {
 
 	public static Vector<Vector<String>> trainsearch(String train_number) {
 		// TODO Auto-generated method stub
-		String sql = "select Tstartstation,Tterminus,Ttype from train where Tname ='"+ train_number + "'";
+		String sql = "select Tname,Tstartstation,Tterminus,Ttype from train where Tname ='"+ train_number + "'";
 		Vector<Vector<String>> temp1 = query(sql);
-		sql = "select Tstartstation,Rstarttime from  train,relation where Tname ='"+train_number +"' and relation.Tid = train.Tid and relaton.Sid = (select Sid from station where Sname = train.Tstartstation";
+		sql = "select Tstartstation,Rstarttime from  train,relation where relation.Tid = train.Tid and Tname ='"+train_number +"'and relation.Sid = (select Sid from station where Sname = train.Tstartstation)";
 		Vector<Vector<String>> temp2 = query(sql);
-		sql = "select Tterminus,Rarrivetime from train,relation where Tname ='" + train_number +"' and relation.Tid = train.Tid and relation.Sid = (select Sid from station where Sname = train.Tterminus)";
+		sql = "select Tterminus,Rarrivetime from train,relation where relation.Tid = train.Tid and Tname ='"+train_number +"'and relation.Sid = (select Sid from station where Sname = train.Tstartstation)";
 		Vector<Vector<String>> temp3 = query(sql);
 		temp1 = combine(temp1,temp2,temp3);
 		return temp1;
@@ -139,9 +139,9 @@ public class LoadUtil {
 		// TODO Auto-generated method stub
 		String sql = "select Tname,Tstartstation,Tterminus,Ttype from train where Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '" + sstart_station+"')) and Tid in  (select Tid from relation where Sid in (select Sid from station where Sname = '" + sarrive_station+"'))";
 		Vector<Vector<String>> temp = query(sql);
-		sql = "select Sname,Rstarttime from station,relation where Sname ='"+sstart_station+"' and station.Sid = relation.Sid and relation.Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sstart_station+"')" +"Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sarrive_station+"')))";
+		sql = "select Sname,Rstarttime from station,relation where Sname ='"+sstart_station+"' and station.Sid = relation.Sid and relation.Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sstart_station+"')" +" and Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sarrive_station+"')))";
 		Vector<Vector<String>> temp1 = query(sql);
-		sql = "select Sname,Rarrivetime from station,relation where Sname ='"+sarrive_station+"' and station.Sid = relation.Sid and relation.Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sstart_station+"')" +"Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sarrive_station+"')))";
+		sql = "select Sname,Rarrivetime from station,relation where Sname ='"+sarrive_station+"' and station.Sid = relation.Sid and relation.Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sstart_station+"')" +"and Tid in (select Tid from relation where Sid in (select Sid from station where Sname = '"+sarrive_station+"')))";
 		Vector<Vector<String>> temp2 = query(sql);
 		temp = combine(temp, temp1, temp2);
 		return temp;

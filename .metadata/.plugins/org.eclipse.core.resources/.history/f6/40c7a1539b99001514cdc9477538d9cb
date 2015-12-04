@@ -1,5 +1,0 @@
-package com.example.train_qurey;
-
-public class CityAdapter<T> {
-
-}

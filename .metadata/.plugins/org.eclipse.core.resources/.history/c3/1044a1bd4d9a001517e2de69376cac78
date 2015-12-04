@@ -1,0 +1,44 @@
+package com.example.daydel;
+
+
+import java.io.File;
+
+import android.R.color;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.os.Bundle;
+import android.view.View;
+
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(new DrawView(this));
+	}
+
+	private static class DrawView extends View{
+
+		Paint paint = new Paint();
+		public DrawView(Context context) {
+			super(context);
+			// TODO Auto-generated constructor stub
+		}
+		public void onDraw(Canvas canvas){
+			paint.setStyle(Style.STROKE);
+			paint.setColor(color.black);
+			paint.setStrokeWidth(10);
+			canvas.drawRect(new RectF(2,2,50,50), paint);
+			invalidate();
+		}
+		
+	}
+
+
+}

@@ -548,7 +548,7 @@ enum WhichView{MAINMENUVIEW,WELCOMEVIEW,ZZCXVIEW,CCCXVIEW,CZCXVIEW,FJGNVIEW,ABOU
 					temp_text.setText(msg[i][position]);
 					temp_text.setTextColor(getResources().getColor(R.color.black));
 					temp_text.setTextSize(14);
-					temp_text.setPadding(1, 2,2,1);
+					temp_text.setPadding(1,6,6,1);
 					temp_text.setWidth(60);
 					temp_text.setGravity(Gravity.CENTER);
 					temp_layout.addView(temp_text);
