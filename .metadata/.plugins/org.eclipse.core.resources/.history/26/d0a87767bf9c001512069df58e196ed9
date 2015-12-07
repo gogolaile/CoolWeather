@@ -1,0 +1,6 @@
+package com.example.daydel;
+
+public class exActivity extends MainActivity{
+
+	public void  onCreate
+}

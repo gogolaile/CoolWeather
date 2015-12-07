@@ -1,0 +1,159 @@
+package com.example.daydel;
+
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+enum WhichView{MAINVIEW,NEWONEVIEW,ADDVIEW,DELETEVIEW,CHECKVIEW,EDITVIEW,DELETEALLVIEW,SEARCHERVIEW,HELPVIEW,ABOUTVIEW,WELCOMEVIEW}
+
+public class MainActivity extends Activity implements OnClickListener{
+
+	WhichView curr;
+	WelcomeView wv;
+	
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		gotoWelcomeView();
+
+         
+	}
+	
+	private void gotoWelcomeView() {
+		// TODO Auto-generated method stub
+		if(wv == null)
+			wv = new WelcomeView(MainActivity.this);
+		setContentView(wv);
+		curr = WhichView.WELCOMEVIEW;
+	}
+
+	public void gotoMainMenu(){
+		setContentView(R.layout.activity_main);
+		curr = WhichView.MAINVIEW;	
+		ImageButton newone_b =(ImageButton)findViewById(R.id.newone_b);
+		ImageButton delete_b = (ImageButton)findViewById(R.id.delete_b);
+		ImageButton check_b = (ImageButton)findViewById(R.id.check_b);
+		ImageButton edit_b = (ImageButton)findViewById(R.id.edit_b);
+		ImageButton deleteall_b = (ImageButton)findViewById(R.id.deleteall_b);
+		ImageButton search_b = (ImageButton)findViewById(R.id.search_b);
+		newone_b.setOnClickListener(this);
+		delete_b.setOnClickListener(this);
+		check_b.setOnClickListener(this);
+		edit_b.setOnClickListener(this);
+		deleteall_b.setOnClickListener(this);
+		search_b.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.newone_b:
+			gotoNewoneView();
+			break;
+		case R.id.delete_b:
+			gotoDeleteView();
+			break;
+		case R.id.check_b:
+			gotoCheckView();
+			break;
+		case R.id.edit_b:
+			gotoEditView();
+			break;
+		case R.id.deleteall_b:
+			gotoDeleteallView();
+			break;
+		case R.id.search_b:
+			gotoSearchView();
+			break;
+		}
+	}
+
+	private void gotoSearchView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.search);
+		curr = WhichView.SEARCHERVIEW;
+	}
+
+	private void gotoDeleteallView() {
+		// TODO Auto-generated method stub
+		curr = WhichView.DELETEALLVIEW;
+	}
+	
+
+	private void gotoEditView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.edit);
+		curr = WhichView.EDITVIEW;
+	}
+
+	private void gotoCheckView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.check);
+		curr = WhichView.CHECKVIEW;
+	}
+
+	private void gotoDeleteView() {
+		// TODO Auto-generated method stub
+		curr = WhichView.DELETEVIEW;
+	}
+
+	private void gotoNewoneView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.newone);
+		curr = WhichView.NEWONEVIEW;
+		Button type_manage =(Button)findViewById(R.id.type_manage_button);
+		type_manage.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoAddView();
+			}
+		});
+	}
+
+
+    protected void gotoAddView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.add);
+		curr = WhichView.ADDVIEW;
+	}
+
+	public boolean onKeyDown(int keyCode,KeyEvent e){
+    	if(keyCode != 4){
+    		return false;
+    	}
+    	if(curr == WhichView.NEWONEVIEW||curr == WhichView.DELETEVIEW||curr == WhichView.CHECKVIEW||
+    			curr == WhichView.EDITVIEW||curr == WhichView.ABOUTVIEW ||curr == WhichView.HELPVIEW ||curr == WhichView.DELETEALLVIEW||curr == WhichView.SEARCHERVIEW){
+    		gotoMainMenu();
+    		return true;
+    	}
+    	if(curr == WhichView.MAINVIEW){
+    		System.exit(0);
+    		return true;
+    	}
+    	if(curr == WhichView.ADDVIEW){
+    		gotoNewoneView();
+    	}
+		return false;    	
+    }
+}

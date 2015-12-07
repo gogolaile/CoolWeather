@@ -1,0 +1,36 @@
+package com.example.daydel;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.WindowManager;
+
+public class exActivity extends MainActivity{
+
+	private int screenwidth;
+	private int screenheight;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);	
+		WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+		screenwidth = wm.getDefaultDisplay().getWidth();
+		screenheight = wm.getDefaultDisplay().getHeight();
+	}
+	
+	public  void setScreenwidth(int screenwidth){
+		this.screenwidth = screenwidth;
+	}
+	
+	public int getScreenwidth(){
+		return screenwidth;
+	}
+
+	public void setScreenheight(int screenheight){
+		this.screenheight = screenheight;
+	}
+	
+	public int getScreenheight(){
+		return screenheight;
+	}
+	
+}

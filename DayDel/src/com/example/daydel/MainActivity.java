@@ -2,10 +2,25 @@ package com.example.daydel;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 enum WhichView{MAINVIEW,NEWONEVIEW,ADDVIEW,DELETEVIEW,CHECKVIEW,EDITVIEW,DELETEALLVIEW,SEARCHERVIEW,HELPVIEW,ABOUTVIEW,WELCOMEVIEW}
@@ -13,13 +28,40 @@ enum WhichView{MAINVIEW,NEWONEVIEW,ADDVIEW,DELETEVIEW,CHECKVIEW,EDITVIEW,DELETEA
 public class MainActivity extends Activity implements OnClickListener{
 
 	WhichView curr;
+	WelcomeView wv;
+	
+	Handler hd = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			switch(msg.what)
+			{
+			case 0:
+				gotoMainMenu();
+				break;
+			case 1:
+				gotoWelcomeView();
+				break;
+			}
+		}
+		
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gotoMainMenu();
-
+		hd.sendEmptyMessage(1);      
 	}
 	
+	private void gotoWelcomeView() {
+		// TODO Auto-generated method stub
+		if(wv == null)
+			wv = new WelcomeView(MainActivity.this);
+		setContentView(wv);
+		curr = WhichView.WELCOMEVIEW;
+	}
+
 	public void gotoMainMenu(){
 		setContentView(R.layout.activity_main);
 		curr = WhichView.MAINVIEW;	
@@ -70,7 +112,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	private void gotoDeleteallView() {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.deleteall);
 		curr = WhichView.DELETEALLVIEW;
 	}
 	
@@ -89,7 +130,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	private void gotoDeleteView() {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.delete);
 		curr = WhichView.DELETEVIEW;
 	}
 
@@ -97,12 +137,39 @@ public class MainActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		setContentView(R.layout.newone);
 		curr = WhichView.NEWONEVIEW;
+		Button type_manage =(Button)findViewById(R.id.type_manage_button);
+		type_manage.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gotoAddView();
+			}
+		});
 	}
 
 
-    public boolean onKeyDown(int keyCode,KeyEvent e){
+    protected void gotoAddView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.add);
+		curr = WhichView.ADDVIEW;
+	}
+
+	public boolean onKeyDown(int keyCode,KeyEvent e){
     	if(keyCode != 4){
     		return false;
+    	}
+    	if(curr == WhichView.NEWONEVIEW||curr == WhichView.DELETEVIEW||curr == WhichView.CHECKVIEW||
+    			curr == WhichView.EDITVIEW||curr == WhichView.ABOUTVIEW ||curr == WhichView.HELPVIEW ||curr == WhichView.DELETEALLVIEW||curr == WhichView.SEARCHERVIEW){
+    		gotoMainMenu();
+    		return true;
+    	}
+    	if(curr == WhichView.MAINVIEW){
+    		System.exit(0);
+    		return true;
+    	}
+    	if(curr == WhichView.ADDVIEW){
+    		gotoNewoneView();
     	}
 		return false;    	
     }

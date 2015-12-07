@@ -1,0 +1,14 @@
+package com.example.daydel;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+
+public class WelcomeView extends View {
+
+	public WelcomeView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+
+}

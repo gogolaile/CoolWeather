@@ -1,0 +1,35 @@
+package com.example.daydel;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.view.View;
+
+public class WelcomeView extends View {
+
+	int[] logo = {R.drawable.dukea,R.drawable.dukeb};
+	Paint paint = new Paint();
+	int CurrentX,CurrentY;
+	Bitmap[] logo_bitmap;
+	int currentId = 0;
+	public WelcomeView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+        initMap();
+	}
+
+    private void initMap(){
+    	Resources res = this.getResources();
+    	for(int i=0;i < logo.length;i++){
+    		logo_bitmap[i] = BitmapFactory.decodeResource(res, logo[i]);
+    	}
+    }
+	
+//	public void onDraw(Canvas canvas){
+//
+//		
+//	}
+}

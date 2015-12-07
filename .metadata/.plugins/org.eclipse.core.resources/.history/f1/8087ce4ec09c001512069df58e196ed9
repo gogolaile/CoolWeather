@@ -1,0 +1,20 @@
+package com.example.daydel;
+
+import android.os.Bundle;
+
+public class exActivity extends MainActivity{
+
+	private int screenwidth;
+	private int screenheight;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);		
+	}
+	
+	public  void setScreenwidth(int screenwidth){
+		this.screenwidth = screenwidth;
+	}
+
+	
+}

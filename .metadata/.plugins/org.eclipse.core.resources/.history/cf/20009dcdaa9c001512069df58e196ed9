@@ -1,0 +1,26 @@
+package com.example.daydel;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.View;
+
+public class WelcomeView extends View {
+
+	int[] logo = {R.drawable.dukea,R.drawable.dukeb};
+	Paint paint = new Paint();
+	int CurrentX,CurrentY;
+	int currentId = 0;
+	public WelcomeView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+
+	}
+
+
+	
+	public void onDraw(Canvas canvas){
+		CurrentX = 
+	}
+}
