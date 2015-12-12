@@ -1,0 +1,11 @@
+package com.example.daydel;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class Utils {
+	SQLiteDatabase db;
+      public static void createTable(){
+    	  
+      }
+	
+}

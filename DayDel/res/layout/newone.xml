@@ -43,7 +43,10 @@
              <Spinner 
                  android:id="@+id/spinner"
                  android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
+                 android:layout_height="40dp"
+                 android:spinnerMode="dropdown"
+                 android:dropDownWidth="800dp"
+                 />
              <Button 
                  android:id="@+id/type_manage_button"
                  android:layout_width="wrap_content"
@@ -73,6 +76,7 @@
                  android:layout_marginLeft="2dp"
                  android:layout_marginRight="4dp"
                  android:layout_span="2"
+                 android:padding="3dp"
                  android:background="@drawable/edittext"/>              
          </TableRow>
        </TableLayout>
@@ -96,6 +100,7 @@
                  	 android:layout_height="match_parent"
                  	 android:layout_marginLeft="2dp"
                  	 android:layout_marginRight="4dp"
+                 	 android:padding="3dp"
                  	 android:layout_marginTop="10dp"
                  	 android:background="@drawable/edittext"/>  
          </LinearLayout>
@@ -148,7 +153,7 @@
                       android:layout_margin="4dp"
                       android:background="#FFCC00">
                     <TextView 
-                        android:id="@+id/alarm_newone"
+                        android:id="@+id/text_alarm_newone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/alarm"

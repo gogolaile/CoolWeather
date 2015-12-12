@@ -1,0 +1,11 @@
+package com.example.daydel;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class Utils {
+	static SQLiteDatabase db;
+      public static void createTable(){
+    	  db = SQLiteDatabase.openOrCreateDatabase(com.example.daydel.MainActivity.this.getFilesDir().toString()+"/daydel", null);
+      }
+	
+}

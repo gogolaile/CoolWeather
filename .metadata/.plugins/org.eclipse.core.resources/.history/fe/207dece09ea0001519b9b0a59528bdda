@@ -1,0 +1,16 @@
+package com.example.sql;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class Util {
+
+	public static SQLiteDatabase createTable(){
+		SQLiteDatabase db = null;
+		try{
+		db = SQLiteDatabase.openOrCreateDatabase("db",null);		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return db;
+	}
+}

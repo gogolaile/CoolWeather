@@ -1,0 +1,26 @@
+package com.example.daydel;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class Utils {
+	static SQLiteDatabase db;
+      public static void createTable(){
+    	try{ 
+    	  db = SQLiteDatabase.openOrCreateDatabase(exActivity.getactivity().getFilesDir().toString()+"/daydel", null);  	 
+    	  String[] sql = new String[]{"create the table if not exists schedule(Tid integer primary key,type char(255))",
+    	  "insert into schedule values(1,'会议')",
+    	  "insert into schedule values(2,'备忘')",
+    	  "insert into schedule values(3,'待办')",
+    	  "insert into schedule values(4,'约会')"};
+    	    for(String s:sql)
+    	    		db.execSQL(s);
+          }catch(Exception e){
+        	  e.printStackTrace();
+        	  }
+          }
+      
+      public static void  type_insert(){
+    	  
+      }
+	
+}

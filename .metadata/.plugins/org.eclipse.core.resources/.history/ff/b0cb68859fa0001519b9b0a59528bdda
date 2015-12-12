@@ -1,0 +1,47 @@
+package com.example.sql;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class Util {
+
+	public static SQLiteDatabase createdb(){
+		SQLiteDatabase db = null;
+		try{
+		db = SQLiteDatabase.openOrCreateDatabase("db",null);		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return db;
+	}
+	
+	public static void createTable(){
+		try{
+			SQLiteDatabase db = createdb();
+			String[] sql = {
+					"create table friends(lastname varchar(15) not null,fristanme varchar(15)  not null,"
+					+ "areacode numeric(3) null,phone varchar(9) null,st char(2) not null,zip varchar(5) not null)",
+					"insert into friends values('BUNDY','AL','100','5551111','IL','223333')",
+					"insert into friends values('MERRICK','BUD','300','5556666','CO','80212')",
+					"insert into friends values('MAST','JD','381','5556767','LA','23456')",
+					"insert into friends values('BULHER','FERRIS','345','5553223','IL','23332')",
+					"create table price(item varchar(15) not null,wholesale decimal(4,2) not null)",
+					"insert into price values('TOMATOES','.34')",
+					"insert into price values('POTATOES','.51')",
+					"insert into price values('BANANAS','.67')",
+					"insert into price values('TURNIPS','.45')",
+					"insert into price values('CHEESE','.89')",
+					"insert into price values('APPLES','.23')"
+			};
+			for(String s:sql){
+				db.execSQL(s);
+			}
+			db.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static void search(){
+		
+	}
+}

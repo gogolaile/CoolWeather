@@ -1,0 +1,13 @@
+package com.example.daydel;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class Utils {
+	static SQLiteDatabase db;
+      public static void createTable(){
+    	  String sql = "create the table if not exists schedule(Tid integer primary key,type varchar(255))";
+    	  db = SQLiteDatabase.openOrCreateDatabase(exActivity.getactivity().getFilesDir().toString()+"/daydel", null);
+    	  db.execSQL(sql);
+      }
+	
+}
