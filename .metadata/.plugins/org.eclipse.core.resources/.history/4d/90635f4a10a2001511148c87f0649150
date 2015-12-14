@@ -1,0 +1,23 @@
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+ <item android:drawable="@drawable/menu_calendar"
+       android:gravity="center"/>
+ <item android:drawable="@drawable/menu_converter"
+       android:top="10dp"
+       android:right="10dp"
+       android:gravity="center"/>
+ <item android:drawable="@drawable/menu_icon_alarm"
+       android:top="10dp"
+       android:right="10dp"
+       android:gravity="center"/>
+ <item android:drawable="@drawable/menu_icon_pedometer"
+       android:bottom="10dp"
+       android:right="10dp"
+       android:gravity="center"/>
+ <item android:drawable="@drawable/menu_icon_personalsafety"
+       android:bottom="10dp"
+       android:right="10dp"
+       android:gravity="center"/>
+</layer-list>
+
+

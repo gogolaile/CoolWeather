@@ -1,0 +1,34 @@
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+ <item android:drawable="@drawable/menu_calendar"
+       android:gravity="center"
+       android:width="50dp"
+       android:height="50dp"/>
+ <item android:drawable="@drawable/menu_converter"
+       android:top="10dp"
+       android:right="10dp"
+       android:gravity="center"
+       android:width="70dp"
+       android:height="70dp"/>
+ <item android:drawable="@drawable/menu_icon_alarm"
+       android:top="10dp"
+       android:right="20dp"
+       android:gravity="center"/>
+ <item
+       android:id="@+id/item4" 
+       android:drawable="@drawable/menu_icon_pedometer"
+       android:bottom="10dp"
+       android:right="30dp"
+       android:gravity="center"
+       android:width="70dp"
+       android:height="70dp"/>
+ <item android:drawable="@drawable/menu_icon_personalsafety"
+       android:bottom="10dp"
+       android:right="40dp"
+       android:gravity="center"
+       android:width="50dp"
+       android:height="50dp"
+       android:start="@+id/item4"/>
+</layer-list>
+
+

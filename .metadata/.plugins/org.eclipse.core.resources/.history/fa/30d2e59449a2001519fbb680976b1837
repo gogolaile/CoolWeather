@@ -1,0 +1,29 @@
+package com.example.layer;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.widget.Gallery;
+
+public class Mygallery extends Gallery{  
+	  
+    public Mygallery(Context context) {  
+        super(context);  
+    }  
+  
+    public Mygallery(Context context, AttributeSet attrs, int defStyle) {  
+        super(context, attrs, defStyle);  
+    }  
+  
+    public Mygallery(Context context, AttributeSet attrs) {  
+        super(context, attrs);  
+    }  
+  
+    @Override  
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {  
+        /** 
+         * return false; 只可以滑动一张图片 
+         * */  
+        return super.onFling(e1, e2, velocityX, velocityY);  
+    }  
+}  

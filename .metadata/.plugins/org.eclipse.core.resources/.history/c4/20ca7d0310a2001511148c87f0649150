@@ -1,0 +1,10 @@
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+ <item android:drawable="@drawable/menu_calendar"/>
+ <item android:drawable="@drawable/menu_converter"/>
+ <item android:drawable="@drawable/menu_icon_alarm"/>
+ <item android:drawable="@drawable/menu_icon_pedometer"/>
+ <item android:drawable="@drawable/menu_icon_personalsafety"/>
+</layer-list>
+
+
