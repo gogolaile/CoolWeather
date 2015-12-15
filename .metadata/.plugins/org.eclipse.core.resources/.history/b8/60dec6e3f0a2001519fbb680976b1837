@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget34"  
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:background="#000000" 
+    >  
+      
+    <Gallery android:id="@+id/img_gallery" 
+        android:layout_width="600dp"  
+        android:layout_height="600dp"  
+        android:layout_gravity="center"
+        android:alpha="0"/>  
+        
+    <ImageSwitcher android:id="@+id/imageswitch4"  
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"  
+        android:alpha="0.5" 
+        android:scaleX="1.4"
+        android:scaleY="1.4" 
+        android:layout_gravity="center"
+        android:layout_marginRight="55dp"/>
+    <ImageSwitcher android:id="@+id/imageswitch5"  
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:scaleX="1.4"
+        android:scaleY="1.4"  
+        android:alpha="0.5" 
+        android:layout_gravity="center"
+        android:layout_marginLeft="55dp"/>
+    <ImageSwitcher android:id="@+id/imageswitch1"  
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:scaleX="2"
+        android:scaleY="2"     
+        android:layout_gravity="center"
+        android:layout_marginRight="35dp"
+        android:alpha="0.8"/>
+    <ImageSwitcher android:id="@+id/imageswitch2"  
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:scaleX="2"
+        android:scaleY="2"     
+        android:layout_gravity="center"
+        android:layout_marginLeft="35dp"
+        android:alpha="0.8"/>
+    <ImageSwitcher android:id="@+id/imageswitch"  
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"  
+        android:scaleX="2.5"
+        android:scaleY="2.5"  
+        android:layout_gravity="center"/>
+</FrameLayout>   
+  
