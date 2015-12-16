@@ -1,0 +1,179 @@
+package org.crazyit.io;
+
+import org.crazyit.io.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+/**
+ * Description:
+ * <br/>site: <a href="http://www.crazyit.org">crazyit.org</a>
+ * <br/>Copyright (C), 2001-2014, Yeeku.H.Lee
+ * <br/>This program is protected by copyright laws.
+ * <br/>Program Name:
+ * <br/>Date:
+ * @author  Yeeku.H.Lee kongyeeku@163.com
+ * @version  1.0
+ */
+public class GestureFlip extends Activity 
+	implements OnGestureListener
+{
+	// ViewFlipper实例
+	ViewFlipper flipper,flipperl1,flipperl2,flipperr1,flipperr2;
+	// 定义手势检测器实例
+	GestureDetector detector;
+	// 定义一个动画数组，用于为ViewFlipper指定切换动画效果
+	Animation[] animations = new Animation[4];
+	Animation[] reverse = new Animation[4];
+	// 定义手势动作两点之间的最小距离
+	final int FLIP_DISTANCE = 50;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		// 创建手势检测器
+		detector = new GestureDetector(this, this);
+		// 获得ViewFlipper实例
+		flipper = (ViewFlipper) this.findViewById(R.id.flipper);
+		flipperl1 = (ViewFlipper) this.findViewById(R.id.flippel1);
+		flipperl2 = (ViewFlipper) this.findViewById(R.id.flipperl2);
+		flipperr1 = (ViewFlipper) this.findViewById(R.id.flipperr1);
+		flipperr2 = (ViewFlipper) this.findViewById(R.id.flipperr2);
+		// 为ViewFlipper添加5个ImageView组件
+		flipper.addView(addImageView(R.drawable.menu_calendar));
+		flipper.addView(addImageView(R.drawable.menu_converter));
+		flipper.addView(addImageView(R.drawable.menu_icon_alarm));
+		flipper.addView(addImageView(R.drawable.menu_icon_pedometer));
+		flipper.addView(addImageView(R.drawable.menu_icon_personalsafety));
+
+		flipperl1.addView(addImageView(R.drawable.menu_converter));
+		flipperl1.addView(addImageView(R.drawable.menu_icon_alarm));
+		flipperl1.addView(addImageView(R.drawable.menu_icon_pedometer));
+		flipperl1.addView(addImageView(R.drawable.menu_icon_personalsafety));
+		flipperl1.addView(addImageView(R.drawable.menu_calendar));
+		
+
+		flipperl2.addView(addImageView(R.drawable.menu_icon_alarm));
+		flipperl2.addView(addImageView(R.drawable.menu_icon_pedometer));
+		flipperl2.addView(addImageView(R.drawable.menu_icon_personalsafety));
+		flipperl2.addView(addImageView(R.drawable.menu_calendar));
+		flipperl2.addView(addImageView(R.drawable.menu_converter));
+
+		flipperr1.addView(addImageView(R.drawable.menu_icon_personalsafety));
+		flipperr1.addView(addImageView(R.drawable.menu_calendar));
+		flipperr1.addView(addImageView(R.drawable.menu_converter));
+		flipperr1.addView(addImageView(R.drawable.menu_icon_alarm));
+		flipperr1.addView(addImageView(R.drawable.menu_icon_pedometer));
+
+		flipperr2.addView(addImageView(R.drawable.menu_icon_pedometer));
+		flipperr2.addView(addImageView(R.drawable.menu_icon_personalsafety));
+		flipperr2.addView(addImageView(R.drawable.menu_calendar));
+		flipperr2.addView(addImageView(R.drawable.menu_converter));
+		flipperr2.addView(addImageView(R.drawable.menu_icon_alarm));
+
+
+		// 初始化Animation数组
+		animations[0] = AnimationUtils.loadAnimation(
+			this, R.anim.anim);
+		animations[1] = AnimationUtils.loadAnimation(
+			this, R.anim.anim2);
+		animations[2] = AnimationUtils.loadAnimation(
+			this, R.anim.anim3);
+		animations[3] = AnimationUtils.loadAnimation(
+			this, R.anim.anim4);
+		
+		reverse[0] = AnimationUtils.loadAnimation(
+				this, R.anim.anim);
+		reverse[1] = AnimationUtils.loadAnimation(
+				this, R.anim.anim2);
+		reverse[2] = AnimationUtils.loadAnimation(
+				this, R.anim.anim3);
+		reverse[3] = AnimationUtils.loadAnimation(
+				this, R.anim.anim4);
+	}
+
+	// 定义添加ImageView的工具方法
+	private View addImageView(int resId)
+	{
+		ImageView imageView = new ImageView(this);
+		imageView.setImageResource(resId);
+		imageView.setScaleType(ImageView.ScaleType.CENTER);
+		return imageView;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent event1, MotionEvent event2,
+		float velocityX, float velocityY)
+	{
+		// 如果第一个触点事件的X座标大于第二个触点事件的X座标超过FLIP_DISTANCE
+		// 也就是手势从右向左滑。
+		if (event1.getX() - event2.getX() > FLIP_DISTANCE)
+		{
+			// 为flipper设置切换的的动画效果
+			Toast.makeText(this, "onFling1:"+event1, Toast.LENGTH_SHORT).show(); 
+			flipper.setInAnimation(animations[1]);
+		//	flipper.setOutAnimation(animations[1]);
+			flipper.showPrevious();
+			return true;
+		}
+		// 如果第二个触点事件的X座标大于第一个触点事件的X座标超过FLIP_DISTANCE
+		// 也就是手势从右向左滑。
+		else if (event2.getX() - event1.getX() > FLIP_DISTANCE)
+		{
+			// 为flipper设置切换的的动画效果
+			Toast.makeText(this, "onFling2:"+event2, Toast.LENGTH_SHORT).show();
+			flipper.setInAnimation(animations[0]);
+	//		flipper.setOutAnimation(animations[0]);
+			flipper.showNext();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		// 将该Activity上的触碰事件交给GestureDetector处理
+		return detector.onTouchEvent(event);
+	}
+
+	@Override
+	public boolean onDown(MotionEvent arg0)
+	{
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent event)
+	{
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent event1
+		, MotionEvent event2, float arg2, float arg3)
+	{
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent event)
+	{
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent event)
+	{
+		return false;
+	}
+}

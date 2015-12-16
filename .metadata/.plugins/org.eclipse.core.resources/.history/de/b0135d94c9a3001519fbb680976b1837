@@ -1,0 +1,202 @@
+package org.crazyit.io;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.crazyit.io.R;
+
+import android.app.Activity;
+import android.content.pm.PackageInfo;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+/**
+ * Description:
+ * <br/>site: <a href="http://www.crazyit.org">crazyit.org</a>
+ * <br/>Copyright (C), 2001-2014, Yeeku.H.Lee
+ * <br/>This program is protected by copyright laws.
+ * <br/>Program Name:
+ * <br/>Date:
+ * @author  Yeeku.H.Lee kongyeeku@163.com
+ * @version  1.0
+ */
+public class GestureFlip extends Activity 
+	implements OnGestureListener
+{
+	// ViewFlipper实例
+	ViewFlipper[] flipper = new ViewFlipper[5];
+//	ImageView view = new ImageView(GestureFlip.this);
+	// 定义手势检测器实例
+	GestureDetector detector;
+	// 定义一个动画数组，用于为ViewFlipper指定切换动画效果
+	Animation[] animations = new Animation[5];
+	Animation[] reverse = new Animation[5];
+	// 定义手势动作两点之间的最小距离
+	final int FLIP_DISTANCE = 50;
+	
+	public class AppInfo {
+		public String appName="";
+		public Drawable appIcon=null;
+		}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		
+		ArrayList<AppInfo> appList = new ArrayList<AppInfo>();
+		List<PackageInfo>   packageinof = getPackageManager().getInstalledPackages(0);
+		for(int i=0;i<packageinof.size();i++) { 
+			PackageInfo packageInfo = packageinof.get(i); 
+			AppInfo tmpInfo =new AppInfo(); 
+			tmpInfo.appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString(); 
+			tmpInfo.appIcon = packageInfo.applicationInfo.loadIcon(getPackageManager());
+			appList.add(tmpInfo);
+			}
+		
+		// 创建手势检测器
+		detector = new GestureDetector(this, this);
+		// 获得ViewFlipper实例
+		flipper[0] = (ViewFlipper) this.findViewById(R.id.flipperl1);//左1
+		flipper[1] = (ViewFlipper) this.findViewById(R.id.flipperl2); //左2
+		flipper[2] = (ViewFlipper) this.findViewById(R.id.flipper);//中间
+		flipper[3] = (ViewFlipper) this.findViewById(R.id.flipperr1);//右1
+		flipper[4] = (ViewFlipper) this.findViewById(R.id.flipperr2);//右2
+		
+		for(int i = 0;i < 5;i++){
+       //中间的viewFlipper加载应用图片		
+//		for(int j=0;j < appList.size();j++){
+//			view.setImageDrawable(appList.get((i+j)%appList.size()).appIcon);
+//			flipper[i].addView (view);
+//		}
+
+		}
+     
+
+		// 初始化Animation数组
+		animations[0] = AnimationUtils.loadAnimation(
+			this, R.anim.anim);
+		animations[1] = AnimationUtils.loadAnimation(
+			this, R.anim.anim2);
+		animations[2] = AnimationUtils.loadAnimation(
+			this, R.anim.anim3);
+		animations[3] = AnimationUtils.loadAnimation(
+			this, R.anim.anim4);
+		animations[4] = AnimationUtils.loadAnimation(
+				this, R.anim.anim5);
+		
+		reverse[0] = AnimationUtils.loadAnimation(
+				this, R.anim.reverse);
+		reverse[1] = AnimationUtils.loadAnimation(
+				this, R.anim.reverse2);
+		reverse[2] = AnimationUtils.loadAnimation(
+				this, R.anim.reverse3);
+		reverse[3] = AnimationUtils.loadAnimation(
+				this, R.anim.reverse4);
+		reverse[4] = AnimationUtils.loadAnimation(
+				this, R.anim.reverse5);
+	}
+
+	// 定义添加ImageView的工具方法
+//	private View addImageView(int resId)
+//	{
+//		ImageView imageView = new ImageView(this);
+//		imageView.setImageResource(resId);
+//		imageView.setScaleType(ImageView.ScaleType.CENTER);
+//		return imageView;
+//	}
+
+	@Override
+	public boolean onFling(MotionEvent event1, MotionEvent event2,
+		float velocityX, float velocityY)
+	{
+		// 如果第一个触点事件的X座标大于第二个触点事件的X座标超过FLIP_DISTANCE
+		// 也就是手势从右向左滑。
+		if (event1.getX() - event2.getX() > FLIP_DISTANCE)
+		{
+			// 为flipper设置切换的的动画效果
+
+			flipper[2].setInAnimation(reverse[0]);
+			flipper[0].setInAnimation(reverse[1]);
+			flipper[1].setInAnimation(reverse[3]);
+			flipper[3].setInAnimation(reverse[2]);
+			flipper[4].setInAnimation(reverse[4]);
+
+			flipper[2].showPrevious();
+			flipper[0].showPrevious();
+			flipper[1].showPrevious();
+			flipper[3].showPrevious();
+			flipper[4].showPrevious();
+			return true;
+		}
+		// 如果第二个触点事件的X座标大于第一个触点事件的X座标超过FLIP_DISTANCE
+		// 也就是手势从右向左滑。
+		else if (event2.getX() - event1.getX() > FLIP_DISTANCE)
+		{
+			// 为flipper设置切换的的动画效果
+
+			flipper[2].setInAnimation(animations[0]);
+			flipper[0].setInAnimation(animations[1]);
+			flipper[1].setInAnimation(animations[3]);
+			flipper[3].setInAnimation(animations[2]);
+			flipper[4].setInAnimation(animations[4]);
+
+
+			flipper[2].showNext();
+			flipper[0].showNext();
+			flipper[1].showNext();
+			flipper[3].showNext();
+			flipper[4].showNext();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		// 将该Activity上的触碰事件交给GestureDetector处理
+		return detector.onTouchEvent(event);
+	}
+
+	@Override
+	public boolean onDown(MotionEvent arg0)
+	{
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent event)
+	{
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent event1
+		, MotionEvent event2, float arg2, float arg3)
+	{
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent event)
+	{
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent event)
+	{
+		return false;
+	}
+}
